@@ -1,0 +1,37 @@
+os: linux
+dist: bionic
+language: minimal
+services:
+  - docker
+
+env:
+  global:
+    - seafile_version=7.1.4
+    - seafile_arch=aarch64
+
+before_install:
+  - sudo rm -rf /var/lib/apt/lists/*
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge"
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - mkdir -vp ~/.docker/cli-plugins/
+  - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.3.0/buildx-v0.3.0.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+  - chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+before_script:
+  - curl -L -O "https://github.com/hanwckf/seafile-aarch64-build/releases/download/v7.1.4-server/seafile-server_7.1.4_aarch64.tar.gz"
+
+script:
+  - sh build.sh
+
+after_script:
+  - docker images
+
+deploy:
+  provider: script
+  script: sh travis-ci/docker_push.sh
+  on:
+    repo: hanwckf/seafile-aarch64-docker
+    tags: true
+
