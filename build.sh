@@ -6,8 +6,6 @@ if [ -z "$seafile_version" -o -z "$seafile_arch" ]; then
 	exit 1
 fi
 
-set -x
-
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
 if [ ! -f seafile-server_${seafile_version}_${seafile_arch}.tar.gz ]; then
@@ -34,6 +32,7 @@ docker buildx build \
 	--build-arg SEAFILE_VERSION="$seafile_version" \
 	--build-arg SEAFILE_ARCH="$seafile_arch" \
 	--platform linux/arm64 --load \
+	--progress plain \
 	-t hanwckf/seafile:${seafile_version}-${seafile_arch} \
 	.
 
