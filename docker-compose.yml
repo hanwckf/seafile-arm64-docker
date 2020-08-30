@@ -19,7 +19,7 @@ services:
       - seafile-net
 
   seafile:
-    image: hanwckf/seafile:7.1.4-aarch64
+    image: hanwckf/seafile:latest
     container_name: seafile
     ports:
       - "80:80"
