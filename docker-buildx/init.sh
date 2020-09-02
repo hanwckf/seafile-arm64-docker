@@ -8,21 +8,19 @@ fi
 
 apt update -y -q --fix-missing && apt upgrade -y -q
 apt install -y -q vim htop net-tools psmisc \
-	wget curl git tzdata nginx libmemcached-dev \
-	python3 python3-pip python3-setuptools zlib1g-dev
+	wget curl git tzdata nginx libmemcached11 \
+	python3 python3-pip python3-setuptools zlib1g
 
 apt clean
 
 if [ -z "$TRAVIS" ]; then
 	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
 	pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+else
+	python3 -m pip install --upgrade pip
 fi
 
-python3.6 -m pip install --upgrade pip
-
-pip3 install click termcolor colorlog pymysql \
-	django==1.11.29 Pillow pylibmc captcha \
-	jinja2 sqlalchemy django-pylibmc django-simple-captcha
+python3 -m pip install click termcolor colorlog pymysql jinja2 sqlalchemy
 
 rm -r /root/.cache/pip
 
