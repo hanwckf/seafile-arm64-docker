@@ -20,7 +20,7 @@ before_install:
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 before_script:
-  - curl -L -O "https://github.com/hanwckf/seafile-aarch64-build/releases/download/v7.1.4-server/seafile-server_7.1.4_aarch64.tar.gz"
+  - curl -L -O "https://github.com/hanwckf/seafile-aarch64-build/releases/download/v${seafile_version}-server/seafile-server_${seafile_version}_${seafile_arch}.tar.gz"
 
 script:
   - sh build.sh

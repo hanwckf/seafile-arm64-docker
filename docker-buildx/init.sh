@@ -14,8 +14,8 @@ apt install -y -q vim htop net-tools psmisc \
 apt clean
 
 if [ -z "$TRAVIS" ]; then
-	pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
-	pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+	python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
+	python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 else
 	python3 -m pip install --upgrade pip
 fi
