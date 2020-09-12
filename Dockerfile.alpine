@@ -1,0 +1,31 @@
+FROM alpine:3.9
+
+ARG SEAFILE_VERSION
+ARG SEAFILE_ARCH
+ARG TRAVIS
+
+ENV SEAFILE_SERVER=seafile-server
+ENV SEAFILE_VERSION=${SEAFILE_VERSION}
+ENV SEAFILE_ARCH=${SEAFILE_ARCH}
+ENV TRAVIS=${TRAVIS}
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US.UTF-8' TERM='xterm' 
+
+ADD docker-buildx/s6-overlay-aarch64.tar.gz /
+ADD seafile-server_${SEAFILE_VERSION}_${SEAFILE_ARCH}-alpine.tar.gz /opt/seafile/
+
+COPY scripts_7.1 /scripts
+COPY templates /templates
+COPY services /services
+COPY docker-buildx/init-alpine.sh /opt
+
+RUN sh /opt/init-alpine.sh
+
+WORKDIR /opt/seafile
+
+ENTRYPOINT ["/init"]
+
+CMD ["/scripts/start.py"]
+
+EXPOSE 80
+

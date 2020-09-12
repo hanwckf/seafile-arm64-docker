@@ -33,9 +33,5 @@ mkdir -p /etc/service/nginx && \
 	mv /services/nginx.conf /etc/nginx/nginx.conf && \
 	mv /services/nginx.sh /etc/service/nginx/run
 
-cd /opt/seafile/ && \
-	tar -zxvf seafile-server_${SEAFILE_VERSION}_${SEAFILE_ARCH}.tar.gz && \
-	rm -f seafile-server_${SEAFILE_VERSION}_${SEAFILE_ARCH}.tar.gz
-
 find /opt/seafile/ \( -name "liblber-*" -o -name "libldap-*" -o -name "libldap_r*" -o -name "libsasl2.so*" \) -delete
 

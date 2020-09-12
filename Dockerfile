@@ -8,15 +8,15 @@ ARG TRAVIS
 ENV SEAFILE_SERVER=seafile-server
 ENV SEAFILE_VERSION=${SEAFILE_VERSION}
 ENV SEAFILE_ARCH=${SEAFILE_ARCH}
-ENV TRAVIS=${TRAVIS}
+
+ADD seafile-server_${SEAFILE_VERSION}_${SEAFILE_ARCH}.tar.gz /opt/seafile/
 
 COPY scripts_7.1 /scripts
 COPY templates /templates
 COPY services /services
-COPY seafile-server_${SEAFILE_VERSION}_${SEAFILE_ARCH}.tar.gz /opt/seafile/
 COPY docker-buildx/init.sh /opt
 
-RUN sh /opt/init.sh && rm /opt/init.sh
+RUN sh /opt/init.sh
 
 WORKDIR /opt/seafile
 

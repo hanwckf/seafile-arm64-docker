@@ -8,11 +8,6 @@ fi
 
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
-if [ ! -f seafile-server_${seafile_version}_${seafile_arch}.tar.gz ]; then
-	echo "seafile tarball not found!"
-	exit 1
-fi
-
 docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
 
 if docker buildx inspect $builder_name >/dev/null 2>&1; then
@@ -28,6 +23,7 @@ fi
 docker buildx inspect --bootstrap
 
 docker buildx build \
+	-f ${DOCKERFILE:-"Dockerfile"} \
 	--build-arg TRAVIS="$TRAVIS" \
 	--build-arg SEAFILE_VERSION="$seafile_version" \
 	--build-arg SEAFILE_ARCH="$seafile_arch" \
