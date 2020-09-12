@@ -27,10 +27,9 @@ python3 -m pip install colorlog pymysql
 
 rm -r /root/.cache/pip
 
-addgroup -g 82 -S www-data
-adduser -u 82 -D -S -G www-data www-data
-
 cp /scripts/create_data_links.sh /etc/cont-init.d/01_create_data_links.sh
+
+sed -i '/^user/d' /services/nginx.conf
 
 mkdir -p /etc/nginx/sites-enabled /etc/nginx/conf.d/ /run/nginx/&& \
 	rm -f /etc/nginx/sites-enabled/* /etc/nginx/conf.d/* && \
