@@ -2,7 +2,7 @@
 
 builder_name=aarch64_builder
 
-if [ -z "$seafile_version" -o -z "$seafile_arch" ]; then
+if [ -z "$seafile_version" ] || [ -z "$seafile_arch" ] || [ -z "$DOCKER_IMAGE_TAG" ]; then
 	exit 1
 fi
 
@@ -29,6 +29,6 @@ docker buildx build \
 	--build-arg SEAFILE_ARCH="$seafile_arch" \
 	--platform linux/arm64 --load \
 	--progress plain \
-	-t hanwckf/seafile:${seafile_version}-${seafile_arch} \
+	-t hanwckf/seafile:${DOCKER_IMAGE_TAG} \
 	.
 
