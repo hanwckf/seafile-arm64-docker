@@ -9,7 +9,7 @@ env:
     - seafile_version=7.1.4 seafile_arch=aarch64
   jobs:
     - DOCKERFILE=Dockerfile DOCKER_IMAGE_TAG="${seafile_version}-${seafile_arch}" SEAFILE_BIN="seafile-server_${seafile_version}_${seafile_arch}.tar.gz"
-#    - DOCKERFILE=Dockerfile.alpine DOCKER_IMAGE_TAG="${seafile_version}-${seafile_arch}-alpine" SEAFILE_BIN="seafile-server_${seafile_version}_${seafile_arch}-alpine.tar.gz"
+    - DOCKERFILE=Dockerfile.alpine DOCKER_IMAGE_TAG="${seafile_version}-${seafile_arch}-alpine" SEAFILE_BIN="seafile-server_${seafile_version}_${seafile_arch}-alpine.tar.gz"
 
 before_install:
   - sudo rm -rf /var/lib/apt/lists/*
@@ -27,7 +27,7 @@ before_script:
 script:
   - sh build.sh
 
-after_script:
+after_success:
   - docker images
 
 deploy:
