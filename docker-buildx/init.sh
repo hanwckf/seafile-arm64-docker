@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$TRAVIS" ]; then
