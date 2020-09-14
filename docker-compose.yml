@@ -21,7 +21,7 @@ services:
       - seafile-net
 
   seafile:
-    image: hanwckf/seafile:latest
+    image: hanwckf/seafile:latest # Specify hanwckf/seafile:latest-alpine to use alpine-based image
     container_name: seafile
     restart: always
     ports:
