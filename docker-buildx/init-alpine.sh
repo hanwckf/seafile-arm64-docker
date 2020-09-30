@@ -9,7 +9,7 @@ fi
 apk update
 
 apk add --no-progress \
-	vim htop net-tools psmisc busybox-extras bash \
+	vim htop net-tools psmisc busybox-extras bash openssl \
 	wget curl git tzdata nginx libmemcached libxcb libjpeg \
 	zlib-dev python3 py3-pip py3-setuptools \
 	py3-click py3-termcolor py3-jinja2 py3-lxml py3-sqlalchemy
@@ -39,4 +39,3 @@ mkdir -p /etc/services.d/nginx && \
 	mv /services/nginx.sh /etc/services.d/nginx/run
 
 chmod +x /etc/cont-init.d/*
-

@@ -9,7 +9,7 @@ if [ -z "$TRAVIS" ]; then
 fi
 
 apt update -y -q --fix-missing && apt upgrade -y -q
-apt install -y -q vim htop net-tools psmisc \
+apt install -y -q vim htop net-tools psmisc openssl \
 	wget curl git tzdata nginx libmemcached11 \
 	python3 python3-pip python3-setuptools zlib1g
 
