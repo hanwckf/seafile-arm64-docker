@@ -12,14 +12,6 @@ services:
     networks:
       - seafile-net
 
-  memcached:
-    image: memcached:1.5.6
-    container_name: seafile-memcached
-    restart: always
-    entrypoint: memcached -m 256
-    networks:
-      - seafile-net
-
   seafile:
     image: hanwckf/seafile:latest # Specify hanwckf/seafile:latest-alpine to use alpine-based image
     container_name: seafile
@@ -45,4 +37,3 @@ services:
 
 networks:
   seafile-net:
-

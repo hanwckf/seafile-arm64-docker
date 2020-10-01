@@ -11,7 +11,7 @@ apk update
 apk add --no-progress \
 	vim htop net-tools psmisc busybox-extras bash openssl \
 	wget curl git tzdata nginx libmemcached libxcb libjpeg \
-	zlib-dev python3 py3-pip py3-setuptools \
+	zlib-dev python3 py3-pip py3-setuptools memcached \
 	py3-click py3-termcolor py3-jinja2 py3-lxml py3-sqlalchemy
 
 rm -rf /var/cache/apk/*
@@ -31,11 +31,14 @@ cp /scripts/create_data_links.sh /etc/cont-init.d/01_create_data_links.sh
 
 sed -i '/^user/d' /services/nginx.conf
 
-mkdir -p /etc/nginx/sites-enabled /etc/nginx/conf.d/ /run/nginx/&& \
+mkdir -p /etc/nginx/sites-enabled /etc/nginx/conf.d/ /run/nginx/ && \
 	rm -f /etc/nginx/sites-enabled/* /etc/nginx/conf.d/* && \
 	mv /services/nginx.conf /etc/nginx/nginx.conf
 
 mkdir -p /etc/services.d/nginx && \
 	mv /services/nginx.sh /etc/services.d/nginx/run
+
+mkdir -p /etc/services.d/memcached && \
+	mv /services/memcached.sh /etc/services.d/memcached/run
 
 chmod +x /etc/cont-init.d/*

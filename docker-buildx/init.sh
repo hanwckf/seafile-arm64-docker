@@ -9,7 +9,7 @@ if [ -z "$TRAVIS" ]; then
 fi
 
 apt update -y -q --fix-missing && apt upgrade -y -q
-apt install -y -q vim htop net-tools psmisc openssl \
+apt install -y -q vim htop net-tools psmisc openssl memcached \
 	wget curl git tzdata nginx libmemcached11 \
 	python3 python3-pip python3-setuptools zlib1g
 
@@ -34,6 +34,9 @@ mkdir -p /etc/service/nginx && \
 	rm -f /etc/nginx/sites-enabled/* /etc/nginx/conf.d/* && \
 	mv /services/nginx.conf /etc/nginx/nginx.conf && \
 	mv /services/nginx.sh /etc/service/nginx/run
+
+mkdir -p /etc/service/memcached && \
+	mv /services/memcached.sh /etc/service/memcached/run
 
 find /opt/seafile/ \( -name "liblber-*" -o -name "libldap-*" -o -name "libldap_r*" -o -name "libsasl2.so*" \) -delete
 
