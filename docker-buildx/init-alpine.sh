@@ -11,8 +11,9 @@ apk update
 apk add --no-progress \
 	vim htop net-tools psmisc busybox-extras bash openssl \
 	wget curl git tzdata nginx libmemcached libxcb libjpeg \
-	zlib-dev python3 py3-pip py3-setuptools memcached \
-	py3-click py3-termcolor py3-jinja2 py3-lxml py3-sqlalchemy
+	zlib-dev python3 py3-pip py3-setuptools memcached tiff \
+	py3-click py3-termcolor py3-jinja2 py3-lxml py3-sqlalchemy \
+	libwebp
 
 rm -rf /var/cache/apk/*
 

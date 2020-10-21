@@ -13,7 +13,7 @@ services:
       - seafile-net
 
   seafile:
-    image: hanwckf/seafile:latest # Specify hanwckf/seafile:latest-alpine to use alpine-based image
+    image: hanwckf/seafile:latest-alpine # Specify hanwckf/seafile:latest to use Ubuntu-based image
     container_name: seafile
     restart: always
     ports:
