@@ -31,7 +31,6 @@ services:
       - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.
     depends_on:
       - db
-      - memcached
     networks:
       - seafile-net
 
