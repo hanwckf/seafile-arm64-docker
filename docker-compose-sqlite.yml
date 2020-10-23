@@ -1,7 +1,7 @@
 version: '2.0'
 services:
   seafile:
-    image: hanwckf/seafile:latest-alpine
+    image: hanwckf/seafile:latest
     container_name: seafile-sqlite
     restart: always
     ports:
