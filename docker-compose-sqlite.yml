@@ -1,0 +1,23 @@
+version: '2.0'
+services:
+  seafile:
+    image: hanwckf/seafile:latest-alpine
+    container_name: seafile-sqlite
+    restart: always
+    ports:
+      - "80:80"
+#      - "443:443"  # If https is enabled, cancel the comment.
+    volumes:
+      - /mnt/hdd/seafile-sqlite:/shared
+    environment:
+      - DB_TYPE=sqlite
+#      - TIME_ZONE=Asia/Shanghai # Optional, default is UTC. Should be uncomment and set to your local time zone.
+      - SEAFILE_ADMIN_EMAIL=me@example.com # Specifies Seafile admin user, default is 'me@example.com'.
+      - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, default is 'asecret'.
+      - SEAFILE_SERVER_LETSENCRYPT=false   # Whether use letsencrypt to generate cert.
+      - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.
+    networks:
+      - seafile-net
+
+networks:
+  seafile-net:

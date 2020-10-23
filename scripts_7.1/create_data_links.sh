@@ -25,6 +25,7 @@ dirs=(
     seahub-data
     pro-data
     seafile-license.txt
+    seahub.db
 )
 
 for d in ${dirs[*]}; do

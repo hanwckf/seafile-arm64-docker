@@ -267,6 +267,9 @@ def update_version_stamp(version, fn=get_version_stamp_file()):
         fp.write(version + '\n')
 
 def wait_for_mysql():
+    if get_conf('DB_TYPE', 'mysql') == 'sqlite':
+        return
+
     db_host = get_conf('DB_HOST', '127.0.0.1')
     db_user = 'root'
     db_passwd = get_conf('DB_ROOT_PASSWD', '')
