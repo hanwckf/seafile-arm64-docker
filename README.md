@@ -6,7 +6,26 @@
 - MariaDB版本：2GB或以上RAM的ARM64机器
    - 例如：树莓派4，小睿私人云，乐橙sn1（hi3798c+2G+SATA），斐讯N1
 
-### 部署方法
+### 传统部署方法
+
+```shell
+# /mnt/seafile-sqlite: seafile数据目录，需要修改为本机实际目录
+# SEAFILE_ADMIN_EMAIL: seafile管理员账号邮箱
+# SEAFILE_ADMIN_PASSWORD: seafile管理员密码
+# SEAFILE_SERVER_HOSTNAME: seafile服务器域名，可以设置成IP地址或者hostname，如`192.168.1.8`或者`raspberrypi`
+
+docker run -d \
+    -v /mnt/seafile-sqlite:/shared \
+    -e "DB_TYPE=sqlite" \
+    -e "SEAFILE_ADMIN_EMAIL=me@example.com" \
+    -e "SEAFILE_ADMIN_PASSWORD=asecret" \
+    -e "SEAFILE_SERVER_HOSTNAME=seafile.example.com" \
+    -p 80:80 \
+    --name seafile-sqlite \
+    hanwckf/seafile:latest
+```
+
+### docker-compose部署方法
 
 1. 安装好docker和docker-compose
 
