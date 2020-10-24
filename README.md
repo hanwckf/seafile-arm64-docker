@@ -1,6 +1,4 @@
-# seafile-aarch64-docker
-
-seafile aarch64 docker版本
+# seafile-arm64-docker
 
 ### 系统要求
 
@@ -17,11 +15,11 @@ seafile aarch64 docker版本
    - 如果要部署MariaDB版本，下载[docker-compose.yml](docker-compose.yml)
 
 3. 修改`docker-compose.yml`
-     - volumes: mariadb和seafile的数据目录挂载点，修改`:`前的路径为本机真实路径，该目录必须有足够的空间容纳资料
+     - volumes: MariaDB和seafile的数据目录挂载点，修改`:`前的路径为本机实际目录，该目录必须有足够的空间
      - SEAFILE_ADMIN_EMAIL: seafile管理员账号邮箱
      - SEAFILE_ADMIN_PASSWORD: seafile管理员密码
      - SEAFILE_SERVER_HOSTNAME: seafile服务器域名，可以设置成IP地址或者hostname，如`192.168.1.8`或者`raspberrypi`
-     - MYSQL_ROOT_PASSWORD, DB_ROOT_PASSWD: （仅MariaDB版本）mariadb的root密码，必须配置成相同的值
+     - MYSQL_ROOT_PASSWORD, DB_ROOT_PASSWD: （仅MariaDB版本）MariaDB的root密码，必须配置成相同的值
 
 4. 在`docker-compose.yml`所在的目录下运行`docker-compose up -d`
 
@@ -53,4 +51,4 @@ docker-compose up -d
 ### 参考资料
 
 - https://cloud.seafile.com/published/seafile-manual-cn/docker/%E7%94%A8Docker%E9%83%A8%E7%BD%B2Seafile.md
-- https://github.com/hanwckf/seafile-aarch64-build
+- https://github.com/hanwckf/seafile-arm64-build
