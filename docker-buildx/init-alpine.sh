@@ -17,6 +17,8 @@ apk add --no-progress \
 
 rm -rf /var/cache/apk/*
 
+ln -sf /usr/bin/python3 /usr/bin/python
+
 if [ -z "$TRAVIS" ]; then
 	python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
 	python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
@@ -43,3 +45,4 @@ mkdir -p /etc/services.d/memcached && \
 	mv /services/memcached.sh /etc/services.d/memcached/run
 
 chmod +x /etc/cont-init.d/*
+
