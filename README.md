@@ -2,14 +2,14 @@
 
 ### 系统要求
 
-- SQLite版本：1GB或以上RAM的ARM64机器
+- （推荐）SQLite版本：1GB或以上RAM的ARM64机器
 - MariaDB版本：2GB或以上RAM的ARM64机器
-   - 例如：树莓派4，小睿私人云，乐橙sn1（hi3798c+2G+SATA），斐讯N1
+   - 例如：树莓派4、斐讯N1、小睿私人云（原生SATA）、乐橙sn1（原生SATA）
 
 ### 传统部署方法
 
 ```shell
-# /mnt/seafile-sqlite: seafile数据目录，需要修改为本机实际目录
+# /mnt/seafile-sqlite: seafile数据目录，修改为本机实际目录
 # SEAFILE_ADMIN_EMAIL: seafile管理员账号邮箱
 # SEAFILE_ADMIN_PASSWORD: seafile管理员密码
 # SEAFILE_SERVER_HOSTNAME: seafile服务器域名，可以设置成IP地址或者hostname，如`192.168.1.8`或者`raspberrypi`
@@ -22,6 +22,7 @@ docker run -d \
     -e "SEAFILE_SERVER_HOSTNAME=seafile.example.com" \
     -p 80:80 \
     --name seafile-sqlite \
+    --restart=always \
     hanwckf/seafile:latest
 ```
 
@@ -34,7 +35,7 @@ docker run -d \
    - 如果要部署MariaDB版本，下载[docker-compose.yml](docker-compose.yml)
 
 3. 修改`docker-compose.yml`
-     - volumes: MariaDB和seafile的数据目录挂载点，修改`:`前的路径为本机实际目录，该目录必须有足够的空间
+     - volumes: MariaDB和seafile的数据目录，修改`:`前的路径为本机实际目录
      - SEAFILE_ADMIN_EMAIL: seafile管理员账号邮箱
      - SEAFILE_ADMIN_PASSWORD: seafile管理员密码
      - SEAFILE_SERVER_HOSTNAME: seafile服务器域名，可以设置成IP地址或者hostname，如`192.168.1.8`或者`raspberrypi`
