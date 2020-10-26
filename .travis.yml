@@ -22,7 +22,7 @@ before_install:
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 before_script:
-  - curl -L -O "https://github.com/hanwckf/seafile-aarch64-build/releases/download/v${seafile_version}-server/$SEAFILE_BIN"
+  - curl -L -O "https://github.com/hanwckf/seafile-arm64-build/releases/download/v${seafile_version}-server/$SEAFILE_BIN"
 
 script:
   - sh build.sh
@@ -34,6 +34,5 @@ deploy:
   provider: script
   script: sh travis-ci/docker_push.sh
   on:
-    repo: hanwckf/seafile-aarch64-docker
+    repo: hanwckf/seafile-arm64-docker
     tags: true
-
