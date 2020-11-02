@@ -1,5 +1,8 @@
 os: linux
 dist: bionic
+virt: lxd
+arch: arm64-graviton2
+group: edge
 language: minimal
 services:
   - docker
@@ -10,16 +13,6 @@ env:
   jobs:
 #    - DOCKERFILE=Dockerfile DOCKER_IMAGE_TAG="${seafile_version}-${seafile_arch}" SEAFILE_BIN="seafile-server_${seafile_version}_${seafile_arch}.tar.gz"
     - DOCKERFILE=Dockerfile.alpine DOCKER_IMAGE_TAG="${seafile_version}-${seafile_arch}-alpine" SEAFILE_BIN="seafile-server_${seafile_version}_${seafile_arch}-alpine.tar.gz"
-
-before_install:
-  - sudo rm -rf /var/lib/apt/lists/*
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge"
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  - mkdir -vp ~/.docker/cli-plugins/
-  - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.3.0/buildx-v0.3.0.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
-  - chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 before_script:
   - curl -L -O "https://github.com/hanwckf/seafile-arm64-build/releases/download/v${seafile_version}-server/$SEAFILE_BIN"
