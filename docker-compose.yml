@@ -29,6 +29,7 @@ services:
       - SEAFILE_ADMIN_PASSWORD=asecret     # Specifies Seafile admin password, default is 'asecret'.
       - SEAFILE_SERVER_LETSENCRYPT=false   # Whether use letsencrypt to generate cert.
       - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.
+#      - SEAFILE_SERVER_SSL_SELFSIGNED=true   # Whether use self-signed SSL cert.
     depends_on:
       - db
     networks:

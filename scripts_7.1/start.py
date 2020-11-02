@@ -18,7 +18,7 @@ from utils import (
     render_template, wait_for_mysql, setup_logging
 )
 from upgrade import check_upgrade
-from bootstrap import init_seafile_server, is_https, init_letsencrypt, generate_local_nginx_conf
+from bootstrap import init_seafile_server, is_https, is_https_selfsigned, init_letsencrypt, init_selfsigned, generate_local_nginx_conf
 
 
 shared_seafiledir = '/shared/seafile'
@@ -49,6 +49,8 @@ def main():
 
     if is_https():
         init_letsencrypt()
+    if is_https_selfsigned():
+        init_selfsigned()
     generate_local_nginx_conf()
     call('nginx -s reload')
 

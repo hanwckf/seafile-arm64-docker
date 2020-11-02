@@ -78,11 +78,23 @@ def init_letsencrypt():
     # Create a crontab to auto renew the cert for letsencrypt.
 
 
+def init_selfsigned():
+    loginfo('Preparing for self signed ssl ...')
+    wait_for_nginx()
+
+    if not exists(ssl_dir):
+        os.mkdir(ssl_dir)
+
+    domain = get_conf('SEAFILE_SERVER_HOSTNAME', 'seafile.example.com')
+
+    call('/scripts/ssl.selfsigned.sh {0} {1}'.format(ssl_dir, domain))
+
+
 def generate_local_nginx_conf():
     # Now create the final nginx configuratin
     domain = get_conf('SEAFILE_SERVER_HOSTNAME', 'seafile.example.com')
     context = {
-        'https': is_https(),
+        'https': is_https() or is_https_selfsigned(),
         'domain': domain,
     }
 
@@ -98,6 +110,9 @@ def generate_local_nginx_conf():
 
 def is_https():
     return get_conf('SEAFILE_SERVER_LETSENCRYPT', 'false').lower() == 'true'
+
+def is_https_selfsigned():
+    return get_conf('SEAFILE_SERVER_SSL_SELFSIGNED', 'false').lower() == 'true'
 
 def parse_args():
     ap = argparse.ArgumentParser()
@@ -153,7 +168,7 @@ def init_seafile_server():
         setup_script = get_script('setup-seafile-mysql.sh')
         call('{} auto -n seafile'.format(setup_script), env=env)
 
-    proto = 'https' if is_https() else 'http'
+    proto = 'https' if is_https() or is_https_selfsigned() else 'http'
     with open(join(topdir, 'conf', 'seahub_settings.py'), 'a+') as fp:
         fp.write('\n')
         fp.write("""CACHES = {
