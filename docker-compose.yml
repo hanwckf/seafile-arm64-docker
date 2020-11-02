@@ -19,6 +19,7 @@ services:
     ports:
       - "80:80"
 #      - "443:443"  # If https is enabled, cancel the comment.
+#      - "8443:443" # HTTPS on port 8443. Also set SEAFILE_SERVER_EXTERNAL_PORT accordingly
     volumes:
       - /mnt/hdd/seafile7/data:/shared   # Requested, specifies the path to Seafile data persistent store.
     environment:
@@ -30,6 +31,7 @@ services:
       - SEAFILE_SERVER_LETSENCRYPT=false   # Whether use letsencrypt to generate cert.
       - SEAFILE_SERVER_HOSTNAME=seafile.example.com # Specifies your host name.
 #      - SEAFILE_SERVER_SSL_SELFSIGNED=true   # Whether use self-signed SSL cert.
+#      - SEAFILE_SERVER_EXTERNAL_PORT=8443   # The external HTTP (or HTTPS) port of the server URL where clients will connect.
     depends_on:
       - db
     networks:

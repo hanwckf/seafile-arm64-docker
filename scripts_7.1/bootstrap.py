@@ -169,6 +169,12 @@ def init_seafile_server():
         call('{} auto -n seafile'.format(setup_script), env=env)
 
     proto = 'https' if is_https() or is_https_selfsigned() else 'http'
+    external_port = get_conf('SEAFILE_SERVER_EXTERNAL_PORT')
+    host = '{server_ip}'.format(server_ip=server_ip)
+    if external_port != None:
+        host += ':{external_port}'.format(external_port=external_port)
+    service_url = '{proto}://{host}'.format(proto=proto, host=host)
+
     with open(join(topdir, 'conf', 'seahub_settings.py'), 'a+') as fp:
         fp.write('\n')
         fp.write("""CACHES = {
@@ -184,7 +190,12 @@ COMPRESS_CACHE_BACKEND = 'locmem'""")
         fp.write('\n')
         fp.write("TIME_ZONE = '{time_zone}'".format(time_zone=os.getenv('TIME_ZONE',default='Etc/UTC')))
         fp.write('\n')
-        fp.write('FILE_SERVER_ROOT = "{proto}://{domain}/seafhttp"'.format(proto=proto, domain=server_ip))
+        fp.write('SERVICE_URL = "{service_url}"'.format(service_url=service_url))
+        fp.write('\n')
+        fp.write('FILE_SERVER_ROOT = "{service_url}/seafhttp"'.format(service_url=service_url))
+        fp.write('\n')
+        # Fix for CSRF Validation Error, see https://forum.seafile.com/t/403-forbidden-csrf-verification-failed-referer-checking-failed-does-not-match-trusted-origins/8577/3
+        fp.write('CSRF_TRUSTED_ORIGINS = ["{host}"]'.format(host=host))
         fp.write('\n')
 
     # By default ccnet-server binds to the unix socket file
