@@ -12,7 +12,7 @@ apt update -y -q --fix-missing && apt upgrade -y -q
 apt install -y -q vim htop net-tools psmisc openssl memcached \
 	wget curl git tzdata nginx libmemcached11 libtiff5 \
 	python3 python3-pip python3-setuptools zlib1g libwebp6 \
-	libwebpdemux2 libwebpmux3 sqlite3
+	libwebpdemux2 libwebpmux3 sqlite3 libfreetype6
 
 apt clean
 

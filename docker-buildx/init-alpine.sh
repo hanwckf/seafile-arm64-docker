@@ -13,7 +13,7 @@ apk add --no-progress \
 	wget curl git tzdata nginx libmemcached libxcb libjpeg \
 	zlib-dev python3 py3-pip py3-setuptools memcached tiff \
 	py3-click py3-termcolor py3-jinja2 py3-lxml py3-sqlalchemy \
-	libwebp sqlite
+	libwebp sqlite freetype
 
 rm -rf /var/cache/apk/*
 
